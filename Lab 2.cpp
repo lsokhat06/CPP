@@ -34,7 +34,7 @@ void sort_diagonal(int** matrix, int size) {
     print_matrix(matrix, size);
 }
 
-// Виділяємо пам'ять під матрицю size x size
+// Виділяємо пам'ять під матрицю size x size і заповнюємо її випадковими числами
 int** allocate_matrix(int size) {
     int** matrix = new int* [size];
     for (int i = 0; i < size; ++i) {
