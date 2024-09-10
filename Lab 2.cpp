@@ -34,12 +34,13 @@ void sort_diagonal(int** matrix, int size) {
     print_matrix(matrix, size);
 }
 
-// Виділяємо пам'ять під матрицю size x size і заповнюємо її випадковими числами
+// Виділяємо пам'ять під матрицю size x size і заповнюємо її випадковими числами;
+// всі числа двоцифрові для зручного перегляду
 int** allocate_matrix(int size) {
     int** matrix = new int* [size];
     for (int i = 0; i < size; ++i) {
         matrix[i] = new int[size];
-        for (int j = 0; j < size; ++j) { matrix[i][j] = rand() % 100; }
+        for (int j = 0; j < size; ++j) { matrix[i][j] = (rand() % 90) + 10; }
     }
     return matrix;
 }
@@ -53,6 +54,7 @@ void deallocate_matrix(int** matrix, int size) {
 }
 
 int main() {
+    srand(time(NULL)); // визначаємо зерно для генератора випадкових чисел
     int size = 8;
     int** matrix = allocate_matrix(size);
     sort_diagonal(matrix, size);
