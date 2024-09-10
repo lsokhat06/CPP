@@ -37,7 +37,7 @@ void sort_diagonal(int** matrix, int size) {
 // Виділяємо пам'ять під матрицю size x size і заповнюємо її випадковими числами;
 // всі числа двоцифрові для зручного перегляду
 int** allocate_matrix(int size) {
-    int** matrix = new int* [size];
+    int** matrix = new int*[size];
     for (int i = 0; i < size; ++i) {
         matrix[i] = new int[size];
         for (int j = 0; j < size; ++j) { matrix[i][j] = (rand() % 90) + 10; }
