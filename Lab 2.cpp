@@ -12,7 +12,7 @@ void print_matrix(int** matrix, int size) {
 }
 
 // Сортуємо бульбашкою елементи головної діагоналі
-void sort_diagonal(int** matrix, int size) {
+void sort_diagonal_and_print(int** matrix, int size) {
     print_matrix(matrix, size);
     // Для n елементів достатньо (n - 1) ітерацій
     for (int iterations = 0; iterations < size - 1; ++iterations) {
@@ -57,6 +57,6 @@ int main() {
     srand(time(NULL)); // визначаємо зерно для генератора випадкових чисел
     int size = 8;
     int** matrix = allocate_matrix(size);
-    sort_diagonal(matrix, size);
+    sort_diagonal_and_print(matrix, size);
     deallocate_matrix(matrix, size);
 }
