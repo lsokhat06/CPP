@@ -50,6 +50,10 @@ int main() {
         {rand() % 1000, "Ivano-Frankivs'k - Kharkiv", "14:00", "7:00"},
         {rand() % 1000, "Kirovograd - Kharkiv", "14:00", "9:00"}
     };
+    
+    std::cout << "Enter the time: ";
+    std::string time;
+    std::getline(std::cin, time);
 
-    schedule.print("14:00");
+    schedule.print(time);
 }
