@@ -26,8 +26,8 @@ public:
 
             std::cout << "Number: " << trains[i].identifier << "\n";
             std::cout << "Route: " << trains[i].route << "\n";
-            std::cout << "Time of departure " << trains[i].departureTime << "\n";
-            std::cout << "Time of arrival " << trains[i].arrivalTime << "\n\n";
+            std::cout << "Time of departure: " << trains[i].departureTime << "\n";
+            std::cout << "Time of arrival: " << trains[i].arrivalTime << "\n\n";
         }
     }
 
