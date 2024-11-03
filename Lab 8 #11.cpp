@@ -181,22 +181,26 @@ private:
 	// Магазин характеризується назвою та списком продуктів
 	std::string name;
 	std::vector<Item> items;
-	/* 
+	/*
 	*   оскільки задачами є також дізнатися назву міста та назву області для
 	*   даного магазину, то, на мою думку, доречним способом пов'язати ці об'єкти
 	*   буде використання спільного вказівника на місто (тому що одному місту
 	*   можуть належати багато магазинів)
 	*/
-	std::shared_ptr<City> city; 
+	std::shared_ptr<City> city;
 public:
 	// 1. Конструктор за замовчуванням
-	Shop() : name("Unnamed"), city(std::make_shared<City>()) {}
+	Shop() : name("Unnamed"), city(std::make_shared<City>()), items({}) {}
 
 	// 2. Деструктор (порожній, оскільки немає динамічних ресурсів, які вимагатимуть очистки)
 	~Shop() {}
 
 	// 3. Конструктор з параметрами
-	Shop(std::string name, std::shared_ptr<City> city) : name(name), city(city) {}
+	Shop(std::string name, std::shared_ptr<City> city, std::vector<Item> items = {}) : name(name), city(city), items(items) {
+		if (!city) {
+			throw std::invalid_argument("City cannot be NULL.");
+		}
+	}
 
 	// 4. Конструктор копіювання
 	Shop(const Shop& shop) : name(shop.name), items(shop.items), city(shop.city) {}
@@ -213,14 +217,10 @@ public:
 
 	// 6. Перевантажена операція виведення в потік
 	friend std::ostream& operator<<(std::ostream& stream, const Shop& shop) {
-		if (!shop.city) {
-			throw std::runtime_error("The city cannot be NULL.");
-		}
-
 		stream << "Shop name: " << shop.name << ", city: " << shop.city->getName() << ", items:\n";
 		for (const Item& item : shop.items) {
 			std::cout << "Name = " << item.getName() << ", mass = " << item.getMass()
-				<< ", quantity = " << item.getQuantity() << ", price = " << item.getPrice();
+				<< ", quantity = " << item.getQuantity() << ", price = " << item.getPrice() << "\n";
 		}
 
 		return stream;
@@ -273,19 +273,16 @@ public:
 
 	// 11.1. Отримання міста
 	std::string getCityName() const {
-		if (!city) { throw std::runtime_error("The city cannot be NULL."); }
 		return city->getName();
 	}
 
 	// 11.2. Отримання області
 	std::string getRegionName() const {
-		if (!city) { throw std::runtime_error("The city cannot be NULL."); }
 		return city->getRegion();
 	}
 
 	// 11.3. Перевірка належності до області
 	bool belongsToRegion(const std::string& region) const {
-		if (!city) { throw std::runtime_error("The city cannot be NULL."); }
 		return city->getRegion() == region;
 	}
 
@@ -329,6 +326,14 @@ public:
 		}
 
 		return total;
+	}
+
+	// 11.9. Прив'язка до міста
+	void setCity(std::shared_ptr<City> newCity) {
+		if (!newCity) {
+			throw std::invalid_argument("City cannot be NULL.");
+		}
+		city = newCity;
 	}
 };
 
