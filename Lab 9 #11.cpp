@@ -12,7 +12,7 @@ protected:
 
 public:
     Matrix(int r, int c) : rows(r), cols(c) {
-        std::cout << "\Called Matrix(" << r << ", " << c << ")\n";
+        std::cout << "Called Matrix(" << r << ", " << c << ")\n";
         mat.resize(r, std::vector<T>(c));
     }
 
@@ -24,7 +24,7 @@ template <typename T>
 class ProcessMatrix : public Matrix<T> {
 public:
     ProcessMatrix(int r, int c) : Matrix<T>(r, c) {
-        std::cout << "\Called ProcessMatrix(" << r << ", " << c << ")\n";
+        std::cout << "Called ProcessMatrix(" << r << ", " << c << ")\n";
     }
 
     void input() override {
